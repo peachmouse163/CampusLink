@@ -14,6 +14,9 @@
         android:theme="@style/Theme.CampusLink"
         tools:targetApi="31">
         <activity
+            android:name=".ThinActivity"
+            android:exported="false" />
+        <activity
             android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -24,7 +27,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
     </application>
 
 </manifest>
