@@ -32,6 +32,16 @@ android {
 
 dependencies {
 
+    //https://github.com/junixapp/XPopup
+    implementation 'com.github.li-xiaojun:XPopup:2.10.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    //https://github.com/gongbox/fss
+    def fss_version = '1.0.35'
+    implementation "com.github.gongbox.fss:adapter:$fss_version"              //适配器模块
+    //implementation "com.github.gongbox.fss:bind:$fss_version"                 //绑定
+    //implementation "com.github.gongbox.fss:runpriority:$fss_version"          //运行优先级
+    implementation "com.github.gongbox.fss:base:$fss_version"                 //包含adapter，bind，runpriority模块，同时还有Activity和Fragment的基类
+
     implementation 'androidx.appcompat:appcompat:1.6.0'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -39,6 +49,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.navigation:navigation-fragment:2.5.3'
     implementation 'androidx.navigation:navigation-ui:2.5.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
