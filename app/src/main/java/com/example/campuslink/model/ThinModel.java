@@ -1,6 +1,6 @@
 package com.example.campuslink.model;
 
-public class ThinModel {
+public class ThinModel implements Preview {
 
     //thinNo	thinTitle	thinDate	infoNo	thinAttribute	thinPlace	thinPhone	thinPic	thinContent
     char[] thinNo;

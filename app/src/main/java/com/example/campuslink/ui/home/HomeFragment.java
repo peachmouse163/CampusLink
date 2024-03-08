@@ -18,18 +18,20 @@ import com.example.campuslink.InitAll;
 import com.example.campuslink.MainActivity;
 import com.example.campuslink.R;
 import com.example.campuslink.databinding.FragmentHomeBinding;
+import com.example.campuslink.model.Preview;
 import com.example.campuslink.model.ThinModel;
+import com.example.campuslink.model.VoluModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment{
 
-    private ArrayList<String> dataList,dataListVolu;
-    private ArrayList<ThinModel> dataListThin;
+    private ArrayList<String> dataList;
+    private ArrayList<Preview> dataListThin,dataListVolu;
     private ListView listView,listThin,listVolu;
     private FssBaseAdapter adapter;
-    private FssImgAdapter imgAdapter;
+    private FssImgAdapter imgThinAdapter,imgVoluAdapter;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,17 +51,25 @@ public class HomeFragment extends Fragment{
         //super.onViewCreated(view, savedInstanceState);
         dataList = new ArrayList<>();
         dataListThin = new ArrayList<>();
+        dataListVolu = new ArrayList<>();
+
         for (int i = 0; i < 50; i++) {
             dataList.add(i + "");
             dataListThin.add(new ThinModel());
+            dataListVolu.add(new VoluModel());
         }
 
         listView = requireView().findViewById(R.id.home_list_news);
         listThin = requireView().findViewById(R.id.home_list_thin);
+        listVolu = requireView().findViewById(R.id.home_list_volu);
+
         adapter = new FssBaseAdapter(this.getActivity(),dataList);
-        imgAdapter = new FssImgAdapter(this.getActivity(),dataListThin);
+        imgThinAdapter = new FssImgAdapter(this.getActivity(),dataListThin);
+        imgVoluAdapter = new FssImgAdapter(this.getActivity(),dataListVolu);
+
         listView.setAdapter(adapter);
-        listThin.setAdapter(imgAdapter);
+        listThin.setAdapter(imgThinAdapter);
+        listVolu.setAdapter(imgVoluAdapter);
     }
 
     @Override

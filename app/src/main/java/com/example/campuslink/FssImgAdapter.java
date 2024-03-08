@@ -5,21 +5,23 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.campuslink.model.Preview;
 import com.example.campuslink.model.ThinModel;
 import com.fss.adapter.listview.BaseAdapter;
 import com.fss.adapter.listview.viewholder.BaseViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class FssImgAdapter extends BaseAdapter<ThinModel,FssImgAdapter.ViewImgHolder> {
+public class FssImgAdapter extends BaseAdapter<Preview,FssImgAdapter.ViewImgHolder> {
 
-    public FssImgAdapter(Context context, List<ThinModel> datas) {
+    public FssImgAdapter(Context context, List<Preview> datas) {
         super(context, datas, R.layout.layout_list_home);
     }
 
     @Override
-    protected void onBindView(ViewImgHolder holder, ThinModel thinModel, int position) {
+    protected void onBindView(ViewImgHolder holder, Preview preview, int position) {
         //super.onBindView(holder, thinModel, position);
 
         /*
