@@ -1,17 +1,29 @@
 package com.example.campuslink.model;
 
+import android.util.Log;
+
 public class ThinModel implements Preview {
 
-    //thinNo	thinTitle	thinDate	infoNo	thinAttribute	thinPlace	thinPhone	thinPic	thinContent
-    char[] thinNo;
-    String thinTitle,thinPlace,thinPic,thinContent;
-    DateTimeModel thinDate = new DateTimeModel();
-    int infoNo,thinAttribute,thinPhone;
+    /*thinNo
+thinTitle
+thinDate
+infoNo
+thinAttribute
+thinPlace
+thinPhone
+thinPic
+thinContent
+thinState
+*/
+
+    private final String TAG = "ThinModel";
+
+    String thinNo,thinTitle,thinDate,infoNo,thinAttribute,thinPlace,thinPhone,thinPic,thinContent,thinState;
 
     public ThinModel() {
     }
 
-    public ThinModel(char[] thinNo, String thinTitle, String thinPlace, String thinPic, String thinContent, DateTimeModel thinDate, int infoNo, int thinAttribute, int thinPhone) {
+    public ThinModel(String thinNo,String thinTitle,String thinDate,String infoNo,String thinAttribute,String thinPlace,String thinPhone,String thinPic,String thinContent,String thinState) {
         this.thinNo = thinNo;
         this.thinTitle = thinTitle;
         this.thinPlace = thinPlace;
@@ -19,17 +31,19 @@ public class ThinModel implements Preview {
         this.thinContent = thinContent;
         this.thinDate = thinDate;
         this.infoNo = infoNo;
+
+        Log.d(TAG, "ThinModel: "+thinAttribute);
         this.thinAttribute = thinAttribute;
         this.thinPhone = thinPhone;
+        this.thinState = thinState;
     }
 
-    public char[] getThinNo() {
+
+    public String getThinNo() {
         return thinNo;
     }
 
-    public void setThinNo(char[] thinNo) {
-        if (thinNo[0] != 'T')
-            return;
+    public void setThinNo(String thinNo) {
         this.thinNo = thinNo;
     }
 
@@ -41,12 +55,44 @@ public class ThinModel implements Preview {
         this.thinTitle = thinTitle;
     }
 
+    public String getThinDate() {
+        return thinDate;
+    }
+
+    public void setThinDate(String thinDate) {
+        this.thinDate = thinDate;
+    }
+
+    public String getInfoNo() {
+        return infoNo;
+    }
+
+    public void setInfoNo(String infoNo) {
+        this.infoNo = infoNo;
+    }
+
+    public String getThinAttribute() {
+        return thinAttribute;
+    }
+
+    public void setThinAttribute(String thinAttribute) {
+        this.thinAttribute = thinAttribute;
+    }
+
     public String getThinPlace() {
         return thinPlace;
     }
 
     public void setThinPlace(String thinPlace) {
         this.thinPlace = thinPlace;
+    }
+
+    public String getThinPhone() {
+        return thinPhone;
+    }
+
+    public void setThinPhone(String thinPhone) {
+        this.thinPhone = thinPhone;
     }
 
     public String getThinPic() {
@@ -65,43 +111,26 @@ public class ThinModel implements Preview {
         this.thinContent = thinContent;
     }
 
-    public DateTimeModel getThinDate() {
-        return thinDate;
+    public String getThinState() {
+        return thinState;
     }
 
-    public void setThinDate(DateTimeModel thinDate) {
-        this.thinDate = thinDate;
+    public void setThinState(String thinState) {
+        this.thinState = thinState;
     }
 
-    public int getInfoNo() {
-        return infoNo;
+    @Override
+    public String getTitle() {
+        return this.thinTitle;
     }
 
-    public void setInfoNo(int infoNo) {
-        if (new StringBuffer(infoNo).length() > 12)
-            return;
-        this.infoNo = infoNo;
+    @Override
+    public String getDateTime() {
+        return this.thinDate;
     }
 
-    public int getThinAttribute() {
-        return thinAttribute;
-    }
-
-    public void setThinAttribute(int thinAttribute) {
-        //0丢
-        //1捡
-        if (thinAttribute != 0 && thinAttribute != 1)
-            return;
-        this.thinAttribute = thinAttribute;
-    }
-
-    public int getThinPhone() {
-        return thinPhone;
-    }
-
-    public void setThinPhone(int thinPhone) {
-        if (new StringBuilder(thinPhone).length() > 13)
-            return;
-        this.thinPhone = thinPhone;
+    @Override
+    public String getInfoName() {
+        return "编号:"+this.infoNo;
     }
 }

@@ -10,4 +10,8 @@ public interface Preview {
     int pic= R.drawable.ic_pic
             ,art=R.drawable.ic_star;
 
+    public String getTitle();
+    public String getDateTime();
+    public String getInfoName();
+
 }

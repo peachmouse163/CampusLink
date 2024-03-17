@@ -2,16 +2,11 @@ package com.example.campuslink.model;
 
 public class User {
 
-    private String infoName,infoDepartment,infoRefresh,infoPassword;
-    private int infoNo,infoPhone;
+    private String infoName,infoDepartment,infoRefresh,infoPassword,infoPhone;
+    private int infoNo;
     //学生专属
     private String infoZy,infoYear,infoClass;
 
-    public boolean isExistence(String infoName,String infoPassword){
-        //if ()
-        return infoPassword.equals("");
-        //else return false;
-    }
 
 
     public String getInfoName() {
@@ -54,11 +49,11 @@ public class User {
         this.infoNo = infoNo;
     }
 
-    public int getInfoPhone() {
+    public String getInfoPhone() {
         return infoPhone;
     }
 
-    public void setInfoPhone(int infoPhone) {
+    public void setInfoPhone(String infoPhone) {
         this.infoPhone = infoPhone;
     }
 

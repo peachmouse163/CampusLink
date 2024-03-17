@@ -30,4 +30,18 @@ public class VoluModel implements Preview {
     }
 
 
+    @Override
+    public String getTitle() {
+        return voluTitle;
+    }
+
+    @Override
+    public String getDateTime() {
+        return "";
+    }
+
+    @Override
+    public String getInfoName() {
+        return "编号:"+infoNo;
+    }
 }

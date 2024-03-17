@@ -60,10 +60,7 @@ public class LoginActivity extends AppCompatActivity implements InitAll {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (loginViewModel.isExistance(etNo.getText().toString(),etPassword.getText().toString()))
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                else
-                    loginViewModel.clearUser();
+                loginViewModel.isExistance(etNo.getText().toString(),etPassword.getText().toString());
             }
         });
     }

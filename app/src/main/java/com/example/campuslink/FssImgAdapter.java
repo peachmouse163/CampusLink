@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.campuslink.model.Preview;
 import com.example.campuslink.model.ThinModel;
+import com.example.campuslink.model.VoluModel;
 import com.fss.adapter.listview.BaseAdapter;
 import com.fss.adapter.listview.viewholder.BaseViewHolder;
 
@@ -14,45 +15,37 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class FssImgAdapter extends BaseAdapter<Preview,FssImgAdapter.ViewImgHolder> {
-
-    public FssImgAdapter(Context context, List<Preview> datas) {
-        super(context, datas, R.layout.layout_list_home);
+public class FssImgAdapter extends BaseAdapter<Preview, FssImgAdapter.ViewImgHolder> {
+    public FssImgAdapter(Context context, List datas) {
+        super(context, datas,R.layout.layout_list_home);
     }
 
     @Override
     protected void onBindView(ViewImgHolder holder, Preview preview, int position) {
-        //super.onBindView(holder, thinModel, position);
-
-        /*
-        等待链接数据库
-        holder.tvName.setText(thinModel.getThinNo()+"");
-        holder.tvTime.setText(thinModel.getThinDate()+"");
-        holder.tvTitle.setText(thinModel.getThinTitle());
-
-        if (thinModel.getThinAttribute() == 0)
-            holder.imgAtr.setImageResource(R.drawable.ic_lose);
-        else
-            holder.imgAtr.setImageResource(R.drawable.ic_get);
-
-        holder.imgPic.setImageResource(thinModel.getThinPic());*/
-
-        holder.tvName.setText("thinModel.getThinNo()+");
-        holder.tvTime.setText("thinModel.getThinDate()+");
-        holder.tvTitle.setText("thinModel.getThinTitle()");
-
-        holder.imgAtr.setImageResource(R.drawable.ic_get);
+        //super.onBindView(holder, preview, position);
+        holder.tvName.setText(preview.getInfoName());
+        holder.tvTitle.setText(preview.getTitle());
+        holder.tvTime.setText(preview.getDateTime());
+        //判断，如果是thin模型，则右上角图标状态判断。
+        if (preview instanceof ThinModel){
+            ThinModel thin = (ThinModel) preview;
+            if (thin.getThinAttribute().equals("0"))
+                holder.imgAtr.setImageResource(R.drawable.ic_lose);
+            else
+                holder.imgAtr.setImageResource(R.drawable.ic_get);
+        }
+        //默认图片
         holder.imgPic.setImageResource(R.drawable.ic_pic);
 
     }
 
-    static class ViewImgHolder extends BaseViewHolder {
+    static class ViewImgHolder extends BaseViewHolder{
+
         TextView tvTitle,tvName,tvTime;
-        ImageView imgPic,imgAtr;
+        ImageView imgAtr,imgPic;
 
-
-        public ViewImgHolder(View view) {
-            super(view);
+        public ViewImgHolder(View itemView) {
+            super(itemView);
             this.tvTitle = findViewById(R.id.listhome_tv_title);
             this.tvName = findViewById(R.id.listhome_tv_name);
             this.tvTime = findViewById(R.id.listhome_tv_time);

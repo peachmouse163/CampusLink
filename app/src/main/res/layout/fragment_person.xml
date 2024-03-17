@@ -1,10 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/WhiteSmoke"
     tools:context=".ui.person.PersonFragment">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:background="@color/SpringGreen" />
+
+    <RelativeLayout
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/shape_corner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/person_img_pic"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="25dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_hello" />
+
+        <TextView
+            android:id="@+id/person_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_toEndOf="@+id/person_img_pic"
+            android:text="姓名" />
+        <TextView
+            android:text="欢迎来到校园通APP~"
+            android:layout_toEndOf="@+id/person_img_pic"
+            android:layout_below="@+id/person_tv_name"
+            android:layout_margin="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:background="@drawable/shape_corner" />
+
+        <TextView
+            android:layout_width="20dp"
+            android:layout_height="0dp"/>
+
+        <TextView
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:background="@drawable/shape_corner" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/person_list_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="375dp"
+        android:layout_marginBottom="48dp"/>
 
 
 
-</FrameLayout>
+</RelativeLayout>
