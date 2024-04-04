@@ -26,6 +26,7 @@ public class FssImgAdapter extends BaseAdapter<Preview, FssImgAdapter.ViewImgHol
         holder.tvName.setText(preview.getInfoName());
         holder.tvTitle.setText(preview.getTitle());
         holder.tvTime.setText(preview.getDateTime());
+
         //判断，如果是thin模型，则右上角图标状态判断。
         if (preview instanceof ThinModel){
             ThinModel thin = (ThinModel) preview;
@@ -33,6 +34,27 @@ public class FssImgAdapter extends BaseAdapter<Preview, FssImgAdapter.ViewImgHol
                 holder.imgAtr.setImageResource(R.drawable.ic_lose);
             else
                 holder.imgAtr.setImageResource(R.drawable.ic_get);
+        }
+        //判断，如果是thin模型，则右上角图标状态判断。
+        if (preview instanceof VoluModel){
+            VoluModel volu = (VoluModel) preview;
+            //未来，改成右上角标【志愿分】;根据分数不同，显示不同角标。
+            switch (volu.getVoluPoint()){
+                case "1":
+                    holder.imgAtr.setImageResource(R.drawable.ic_num1);
+                    break;
+                case "2":
+                    holder.imgAtr.setImageResource(R.drawable.ic_num2);
+                    break;
+                case "3":
+                    holder.imgAtr.setImageResource(R.drawable.ic_num3);
+                    break;
+                case "4":
+                    holder.imgAtr.setImageResource(R.drawable.ic_num4);
+                    break;
+                default:
+                    holder.imgAtr.setImageResource(R.drawable.ic_hello);
+            }
         }
         //默认图片
         holder.imgPic.setImageResource(R.drawable.ic_pic);

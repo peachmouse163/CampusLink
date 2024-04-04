@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,30 +18,33 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+
 import com.example.campuslink.FssBaseAdapter;
 import com.example.campuslink.FssImgAdapter;
 import com.example.campuslink.InitAll;
-import com.example.campuslink.MainActivity;
 import com.example.campuslink.R;
-import com.example.campuslink.databinding.FragmentHomeBinding;
 import com.example.campuslink.link.LinkToData;
 import com.example.campuslink.link.MyThread;
+import com.example.campuslink.login.LoginViewModel;
 import com.example.campuslink.model.NewsModel;
 import com.example.campuslink.model.Preview;
-import com.example.campuslink.model.ThinModel;
 import com.example.campuslink.model.VoluModel;
 import com.example.campuslink.news.NewsActivity;
+import com.example.campuslink.databinding.FragmentHomeBinding;
+import com.example.campuslink.thin.ThinActivity;
+import com.example.campuslink.volu.VoluActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class HomeFragment extends Fragment implements InitAll{
 
     private final String TAG = "HomeFragment";
 
-    private ArrayList<NewsModel> dataList;
-    private ArrayList<Preview> dataListThin,dataListVolu;
+    public static ArrayList<NewsModel> dataList;
+    public static ArrayList<Preview> dataListThin,dataListVolu;
+    public static ArrayList<VoluModel> myVolus;
+
     private ListView listView,listThin,listVolu;
     private MyThread myThread,myThinThread,myVoluThread;
     private FssBaseAdapter adapter;
@@ -61,23 +63,49 @@ public class HomeFragment extends Fragment implements InitAll{
                         initData();
                     }
                     else
-                        Toast.makeText(requireContext(),"获取不到新闻",Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(),"暂无新闻",Toast.LENGTH_LONG).show();
                     break;
-                case MyThread.LOGINEXCEPT:
+                case MyThread.EXCEPT:
                     Toast.makeText(requireContext(),"",Toast.LENGTH_LONG).show();
                     break;
                 case MyThread.GETALLTHIN:
-                    Log.d(TAG, "handleMessage: "+(String) msg.obj);
                     if (!((String)msg.obj).equals("")){
                         dataListThin = LinkToData.getThin((String) msg.obj);
                         initData();
                     }
                     else
-                        Toast.makeText(requireContext(),"获取不到thin",Toast.LENGTH_LONG).show();
+                        Toast.makeText(requireContext(),"暂无thin",Toast.LENGTH_LONG).show();
+                    break;
+
+                case MyThread.GETALLVOLU:
+                    if (!((String)msg.obj).equals("")){
+                        dataListVolu = LinkToData.getVolu((String) msg.obj);
+                        for (Preview volu:
+                             dataListVolu) {
+                            VoluModel voluModel = (VoluModel) volu;
+                            Log.d(TAG, "handleMessage: "+voluModel.getVoluId());
+                        }
+                        //筛选出本账户参加的活动
+                        myVolus = getMyVolus(dataListVolu);
+                        initData();
+                    }
+                    else
+                        Toast.makeText(requireContext(),"暂无volu",Toast.LENGTH_LONG).show();
                     break;
             }
         }
     };
+
+    private ArrayList<VoluModel> getMyVolus(ArrayList<Preview> dataListVolu) {
+        ArrayList<VoluModel> voluModels = new ArrayList<>();
+        for (Preview preview :
+                dataListVolu) {
+            VoluModel voluModel = (VoluModel) preview;
+            if (new StringBuffer(voluModel.getVoluState()).indexOf(LoginViewModel.user.getInfoNo()+"") > -1)
+                voluModels.add(voluModel);
+        }
+        return voluModels;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -100,17 +128,19 @@ public class HomeFragment extends Fragment implements InitAll{
         startGetNewsThread();
         //开启获得Thin
         startGetThinThread();
+        //开启获得volu
+        startGetVoluThread();
 
-        for (int i = 0; i < 50; i++) {
-            dataListVolu.add(new VoluModel());
-        }
+        initView();
+        initClick();
+    }
 
-        listView = requireView().findViewById(R.id.home_list_news);
-        listThin = requireView().findViewById(R.id.home_list_thin);
-        listVolu = requireView().findViewById(R.id.home_list_volu);
-
-        imgVoluAdapter = new FssImgAdapter(this.getActivity(),dataListVolu);
-        listVolu.setAdapter(imgVoluAdapter);
+    private void startGetVoluThread() {
+        myVoluThread = new MyThread();
+        myVoluThread.setMod(myThread.VOLU);
+        myVoluThread.setHandler(handler);
+        myVoluThread.setDatas(null);
+        myVoluThread.start();
     }
 
     private void startGetThinThread() {
@@ -142,7 +172,9 @@ public class HomeFragment extends Fragment implements InitAll{
 
     @Override
     public void initView() {
-
+        listView = requireView().findViewById(R.id.home_list_news);
+        listThin = requireView().findViewById(R.id.home_list_thin);
+        listVolu = requireView().findViewById(R.id.home_list_volu);
     }
 
     @Override
@@ -158,6 +190,9 @@ public class HomeFragment extends Fragment implements InitAll{
         imgThinAdapter = new FssImgAdapter(this.getActivity(),dataListThin);
         listThin.setAdapter(imgThinAdapter);
 
+        imgVoluAdapter = new FssImgAdapter(this.getActivity(),dataListVolu);
+        listVolu.setAdapter(imgVoluAdapter);
+
     }
 
     @Override
@@ -168,6 +203,24 @@ public class HomeFragment extends Fragment implements InitAll{
                 Toast.makeText(requireContext(),"position:"+position,Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(requireActivity(), NewsActivity.class);
                 intent.putExtra("webUrl",dataList.get(position).getNewUrl());
+                startActivity(intent);
+            }
+        });
+        listThin.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(requireContext(),"position:"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ThinActivity.class);
+                intent.putExtra("thin",position);
+                startActivity(intent);
+            }
+        });
+        listVolu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(requireContext(),"position:"+position,Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), VoluActivity.class);
+                intent.putExtra("volu",position);
                 startActivity(intent);
             }
         });

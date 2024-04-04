@@ -24,7 +24,7 @@ public class PersonFragment extends Fragment {
 
     private ArrayList<String> data;
     private FssBaseAdapter adapter;
-    private TextView tvName;
+    private TextView tvName,tvVolu;
     private ListView listView;
     private PersonViewModel mViewModel;
 
@@ -57,5 +57,15 @@ public class PersonFragment extends Fragment {
 
         tvName = requireView().findViewById(R.id.person_tv_name);
         tvName.setText(LoginViewModel.user.getInfoName());
+
+        tvVolu = requireView().findViewById(R.id.person_tv_volu);
+        tvVolu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //进入已参与的活动选择菜单栏
+                //显示名字+进行中/已结束
+                //再进入volu的详细展示界面
+            }
+        });
     }
 }

@@ -3,8 +3,8 @@ package com.example.campuslink.model;
 public class User {
 
     private String infoName,infoDepartment,infoRefresh,infoPassword,infoPhone;
-    private int infoNo;
-    //学生专属
+    public static int infoNo,infoIdentity;
+    //
     private String infoZy,infoYear,infoClass;
 
 
@@ -79,5 +79,13 @@ public class User {
 
     public void setInfoClass(String infoClass) {
         this.infoClass = infoClass;
+    }
+
+    public static int getInfoIdentity() {
+        return infoIdentity;
+    }
+
+    public static void setInfoIdentity(int infoIdentity) {
+        User.infoIdentity = infoIdentity;
     }
 }

@@ -5,22 +5,34 @@
       <map>
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/drawable/ic_hello.xml" value="0.214" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/drawable/ic_pic.xml" value="0.214" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_com.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_login.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_main.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_news.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_teacher.xml" value="0.16666666666666666" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_teacher_main.xml" value="0.3098958333333333" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_teacher_only.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_thin.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/activity_volu.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_dashboard.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_home.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_message.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_notifications.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_person.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_teacher_home.xml" value="0.3098958333333333" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_teacher_message.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/fragment_teacher_person.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_list_com_me.xml" value="0.3234375" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_list_com_you.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_list_home.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_list_item.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_message_collcet.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_message_connect.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_message_mess.xml" value="0.32447916666666665" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_message_sign.xml" value="0.3234375" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/layout/layout_message_title.xml" value="0.3234375" />
         <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/menu/bottom_nav_menu.xml" value="0.32447916666666665" />
+        <entry key="..\:/PersonFile/study/project/android/CampusLink/app/src/main/res/menu/bottom_nav_menu_t.xml" value="0.32447916666666665" />
       </map>
     </option>
   </component>

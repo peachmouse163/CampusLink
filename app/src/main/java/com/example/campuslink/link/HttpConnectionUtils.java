@@ -17,6 +17,9 @@ public class HttpConnectionUtils {
     public static final String login="LoginServlet";
     public static final String news="NewsServlet";
     public static final String thin = "ThinServlet";
+    public static final String volu = "VoluServlet";
+    public static final String com = "ComServlet";
+    public static final String mess = "MessServlet";
 
     public static HttpURLConnection getConnection(String data,String mod) throws Exception {
         //http://192.168.3.61:8080/zzzlogin/LoginServlet/username=120012001259&password=123456&sign=1

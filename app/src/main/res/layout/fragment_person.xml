@@ -52,6 +52,10 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/person_tv_volu"
+            android:gravity="center"
+            android:text="志 愿\n经 历"
+            android:textSize="32sp"
             android:layout_width="175dp"
             android:layout_height="175dp"
             android:background="@drawable/shape_corner" />

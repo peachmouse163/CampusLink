@@ -1,0 +1,53 @@
+package com.example.campuslink.ui.teacher;
+
+import androidx.lifecycle.ViewModelProvider;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.campuslink.R;
+import com.example.campuslink.databinding.FragmentTeacherPersonBinding;
+
+public class TeacherPersonFragment extends Fragment {
+
+    private TeacherPersonViewModel mViewModel;
+
+    private FragmentTeacherPersonBinding binding;
+
+    public static TeacherPersonFragment newInstance() {
+        return new TeacherPersonFragment();
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
+        mViewModel = new ViewModelProvider(this).get(TeacherPersonViewModel.class);
+
+        binding = FragmentTeacherPersonBinding.inflate(inflater,container,false);
+        View root = binding.getRoot();
+
+        return root;
+        //return inflater.inflate(R.layout.fragment_teacher_person, container, false);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(TeacherPersonViewModel.class);
+        // TODO: Use the ViewModel
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+}

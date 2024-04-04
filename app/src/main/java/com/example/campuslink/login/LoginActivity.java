@@ -12,13 +12,14 @@ import android.widget.EditText;
 import com.example.campuslink.InitAll;
 import com.example.campuslink.MainActivity;
 import com.example.campuslink.R;
+import com.example.campuslink.TeacherActivity;
 import com.example.campuslink.model.User;
 
 public class LoginActivity extends AppCompatActivity implements InitAll {
 
     private LoginViewModel loginViewModel;
 
-    private Button btnLogin;
+    private Button btnLogin,btnTeacher;
     private EditText etNo,etPassword;
 
     @Override
@@ -48,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements InitAll {
         etNo = findViewById(R.id.login_et_name);
         etPassword = findViewById(R.id.login_et_password);
         btnLogin = findViewById(R.id.login_btn_login);
+        btnTeacher = findViewById(R.id.login_btn_teacher);
     }
 
     @Override
@@ -61,6 +63,13 @@ public class LoginActivity extends AppCompatActivity implements InitAll {
             @Override
             public void onClick(View v) {
                 loginViewModel.isExistance(etNo.getText().toString(),etPassword.getText().toString());
+            }
+        });
+        btnTeacher.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, TeacherActivity.class);
+                startActivity(intent);
             }
         });
     }

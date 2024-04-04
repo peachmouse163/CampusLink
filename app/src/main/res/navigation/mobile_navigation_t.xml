@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_t"
+    app:startDestination="@id/teacherHomeFragment">
+
+    <fragment
+        android:id="@+id/teacherHomeFragment"
+        android:name="com.example.campuslink.ui.teacher.TeacherHomeFragment"
+        android:label="fragment_teacher_home"
+        tools:layout="@layout/fragment_teacher_home" />
+    <fragment
+        android:id="@+id/teacherMessageFragment"
+        android:name="com.example.campuslink.ui.teacher.TeacherMessageFragment"
+        android:label="fragment_teacher_message"
+        tools:layout="@layout/fragment_teacher_message" />
+    <fragment
+        android:id="@+id/teacherPersonFragment"
+        android:name="com.example.campuslink.ui.teacher.TeacherPersonFragment"
+        android:label="fragment_teacher_person"
+        tools:layout="@layout/fragment_teacher_person" />
+
+
+</navigation>

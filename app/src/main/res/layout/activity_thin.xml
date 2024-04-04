@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/thin_img_attribute"
-        android:text="丢"
-        android:textSize="25sp"
-        android:gravity="center"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"
         android:layout_width="48dp"
-        android:layout_height="48dp"/>
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center"
+        android:text="丢"
+        android:textSize="25sp" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -25,6 +25,7 @@
             android:id="@+id/thin_img_TX"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:src="@drawable/ic_hello"
             android:contentDescription="头像" />
         <TextView
             android:id="@+id/thin_tv_name"

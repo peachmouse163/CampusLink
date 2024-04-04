@@ -2,6 +2,7 @@ package com.example.campuslink;
 
 import android.os.Bundle;
 
+import com.example.campuslink.link.MyThread;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.ActionBar;
@@ -40,4 +41,9 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    protected void onDestroy() {
+        MyThread.comModFlag = false;
+        super.onDestroy();
+    }
 }

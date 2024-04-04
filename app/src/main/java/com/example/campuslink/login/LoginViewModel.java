@@ -40,7 +40,24 @@ public class LoginViewModel {
                     //LinkToData,转换为User类型。本机判断。
                     if (!((String)msg.obj).equals("")) {
                         user = LinkToData.getUser((String) msg.obj);
-                        loginActivity.startActivity(new Intent(loginContext, MainActivity.class));
+                        switch (User.infoIdentity){
+                            case 0:
+                                //学生
+                                loginActivity.startActivity(new Intent(loginContext, MainActivity.class));
+                                break;
+                            case 1:
+                                //教师
+                                //loginActivity.startActivity(new Intent(loginContext, TeacherMainActivity.class));
+                                break;
+                            case 2:
+                                //部门,或许不存在合并为教师。
+                                break;
+                            case 3:
+                                //后台
+                                break;
+                            default:
+                                break;
+                        }
                     }
                     else
                         Toast.makeText(loginContext,"账号密码错误",Toast.LENGTH_LONG).show();
