@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:layout_margin="15dp"
+    android:padding="20dp"
+    android:background="@drawable/shape_corner"
     android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/lmt_tv_title"
+        android:textSize="25sp"
+        android:textColor="@color/black"
         android:text="通知标题"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -14,18 +19,21 @@
     <TextView
         android:id="@+id/lmt_tv_content"
         android:text="\t通知内容"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/lmt_tv_department"
         android:gravity="end"
         android:text="部门"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/lmt_tv_time"
         android:gravity="end"
         android:text="时间"
+        android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

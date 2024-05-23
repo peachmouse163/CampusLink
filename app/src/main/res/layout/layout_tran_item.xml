@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/tran_ll_layout"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginVertical="100dp"
+    android:background="@drawable/shape_corner"
+    android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/settle_tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="标题"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/settle_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="内容"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/settle_img_pic"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/settle_tv_InfoNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:text="卖家用户号为"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/settle_tv_place"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="right"
+            android:text="收货地址"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/settle_tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="right"
+            android:text="time" />
+
+        <TextView
+            android:id="@+id/settle_tv_myInfoNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:gravity="right"
+            android:text="当前用户号为"
+            android:textColor="@color/black" />
+
+
+</LinearLayout>

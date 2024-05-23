@@ -3,6 +3,7 @@ package com.example.campuslink.model;
 import com.example.campuslink.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Message {
 
@@ -11,9 +12,14 @@ public interface Message {
     ArrayList<String> scope=null,list=null;
     int pic = R.drawable.ic_star;
 
-    String getTitle();
-    String getMessage();
-    int getPic();
-    String getTime();
+    public String getTitle();
+
+    public String getMessage();
+
+    public int getPic();
+
+    public String getTime();
+
+    public List<String> getReadList();
 
 }

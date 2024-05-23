@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/loginbackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".volu.VoluActivity">
 
-    <ImageView
-        android:id="@+id/volu_img_attribute"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:gravity="center"
-        android:src="@drawable/ic_num3"
-        android:textSize="25sp" />
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <RelativeLayout
+        android:layout_margin="15dp"
         android:gravity="center_vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
@@ -27,75 +20,106 @@
             android:layout_height="48dp"
             android:src="@drawable/ic_hello"
             android:contentDescription="头像" />
+
         <TextView
             android:id="@+id/volu_tv_name"
-            android:text="数据—姓名"
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/volu_img_TX"
+            android:text="数据—姓名" />
+
+        <ImageView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/volu_img_attribute"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:src="@drawable/ic_num3"
+            android:textSize="25sp" />
+    </RelativeLayout>
 
     <LinearLayout
+        android:background="@drawable/shape_corner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/volu_img_attribute"
         android:layout_marginHorizontal="25dp"
+        android:padding="15dp"
         android:orientation="vertical">
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_titel"
+            android:textSize="20sp"
+            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="数据-内容标题" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_content"
+            android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="数据-内容内容\n内容内容\n内容内容" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="数据-人数" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="地址:" />
 
         <TextView
+            android:layout_marginVertical="5dp"
+            android:textColor="@color/purple_200"
             android:id="@+id/volu_tv_online"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="线上线下:" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="开始时间:" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
             android:text="结束时间:" />
 
         <TextView
+            android:layout_marginVertical="5dp"
             android:id="@+id/volu_tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:textColor="@color/black"
             android:text="时间:" />
 
         <Button
-            android:layout_gravity="center_horizontal"
-            android:text="报名"
             android:id="@+id/volu_btn_sign"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:padding="5dp"
+            android:background="@drawable/shape_button"
+            android:text="报名" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

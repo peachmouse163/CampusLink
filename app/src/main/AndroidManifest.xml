@@ -2,8 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.campuslink">
-    <!-- 访问互联网权限 -->
+    <!-- 访问签名 -->
+    <uses-permission android:name="android.permission.PACKAGE_ADNOUNCEMENT" /> <!-- 拨打电话权限 -->
+    <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 访问互联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +23,48 @@
         android:theme="@style/Theme.CampusLink"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.teacher.tmess.MessResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ques.QtaHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tran.TranHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".volu.VoluHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.teacher.tmess.AddMessageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.teacher.tvolu.AddVoluActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tran.TranResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tran.ShowTranActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tran.SettleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ques.QuesCreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ques.QuesShowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".tools.ImagePickerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".thin.CreateThinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".messages.ShowMessagesActivity"
+            android:exported="false" />
         <activity
             android:name=".TeacherActivity"
             android:exported="false" />

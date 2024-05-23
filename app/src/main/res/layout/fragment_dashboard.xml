@@ -6,17 +6,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@color/WhiteSmoke"
+    android:background="@drawable/loginbackground"
     tools:context=".ui.dashboard.DashboardFragment">
     
     <ImageView
         android:id="@+id/pay_img_pic"
-        android:src="@drawable/ic_pic"
+        android:src="@drawable/pic_tran_back"
         android:background="@drawable/shape_corner"
         android:layout_marginHorizontal="25dp"
         android:layout_marginVertical="10dp"
         android:layout_width="match_parent"
         android:layout_height="128dp"/>
+
+    <Button
+        android:text="发布"
+        android:background="@drawable/shape_button"
+        android:layout_marginHorizontal="25dp"
+        android:layout_marginBottom="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <GridView
         android:numColumns="2"

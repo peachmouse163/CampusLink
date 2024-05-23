@@ -1,34 +1,57 @@
 package com.example.campuslink.ui.dashboard;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.campuslink.FssBaseAdapter;
 import com.example.campuslink.FssImgAdapter;
 import com.example.campuslink.R;
 import com.example.campuslink.databinding.FragmentDashboardBinding;
-import com.example.campuslink.model.Pay;
+import com.example.campuslink.link.LinkToData;
+import com.example.campuslink.link.MyThread;
 import com.example.campuslink.model.Preview;
-import com.example.campuslink.model.ThinModel;
-import com.example.campuslink.model.VoluModel;
+import com.example.campuslink.model.TranModel;
+import com.example.campuslink.tran.SettleActivity;
+import com.example.campuslink.tran.ShowTranActivity;
 
 import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {
 
-    private ArrayList<Preview> payList;
+    public static ArrayList<Preview> tranList;
     private FssImgAdapter payAdapter;
     private GridView gridView;
     private FragmentDashboardBinding binding;
+
+    private MyThread tranThread;
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(@NonNull Message msg) {
+            if (msg.what == MyThread.ALLTRAN){
+                if (msg.obj != null ){
+                    tranList = LinkToData.getTrans((String) msg.obj);
+                    initData();
+                }
+            }
+            return true;
+        }
+    });
+
+    private void initData() {
+        payAdapter = new FssImgAdapter(this.getContext(),tranList);
+        gridView.setAdapter(payAdapter);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -43,15 +66,22 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-        payList = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            payList.add(new Pay());
-        }
+        tranList = new ArrayList<>();
         gridView = requireView().findViewById(R.id.pay_list_pay);
-        payAdapter = new FssImgAdapter(this.getContext(),payList);
-        gridView.setAdapter(payAdapter);
 
+        tranThread = new MyThread();
+        tranThread.setMod(tranThread.GETTRAN);
+        tranThread.setHandler(handler);
+        tranThread.start();
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(requireActivity(), ShowTranActivity.class);
+                intent.putExtra("position",position);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

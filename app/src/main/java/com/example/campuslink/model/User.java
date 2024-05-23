@@ -1,11 +1,17 @@
 package com.example.campuslink.model;
 
+import com.google.gson.annotations.Expose;
+
 public class User {
 
-    private String infoName,infoDepartment,infoRefresh,infoPassword,infoPhone;
-    public static int infoNo,infoIdentity;
-    //
-    private String infoZy,infoYear,infoClass;
+    String infoName,infoDepartment,infoRefresh,infoPhone;
+    int infoIdentity;
+    String infoZy,infoYear,infoClass;
+
+    @Expose(serialize = true,deserialize = true)
+    int infoNo;
+    @Expose(serialize = true,deserialize = true)
+    String infoPassword;
 
 
 
@@ -33,28 +39,20 @@ public class User {
         this.infoRefresh = infoRefresh;
     }
 
-    public String getInfoPassword() {
-        return infoPassword;
-    }
-
-    public void setInfoPassword(String infoPassword) {
-        this.infoPassword = infoPassword;
-    }
-
-    public int getInfoNo() {
-        return infoNo;
-    }
-
-    public void setInfoNo(int infoNo) {
-        this.infoNo = infoNo;
-    }
-
     public String getInfoPhone() {
         return infoPhone;
     }
 
     public void setInfoPhone(String infoPhone) {
         this.infoPhone = infoPhone;
+    }
+
+    public int getInfoIdentity() {
+        return infoIdentity;
+    }
+
+    public void setInfoIdentity(int infoIdentity) {
+        this.infoIdentity = infoIdentity;
     }
 
     public String getInfoZy() {
@@ -81,11 +79,19 @@ public class User {
         this.infoClass = infoClass;
     }
 
-    public static int getInfoIdentity() {
-        return infoIdentity;
+    public int getInfoNo() {
+        return infoNo;
     }
 
-    public static void setInfoIdentity(int infoIdentity) {
-        User.infoIdentity = infoIdentity;
+    public void setInfoNo(int infoNo) {
+        this.infoNo = infoNo;
+    }
+
+    public String getInfoPassword() {
+        return infoPassword;
+    }
+
+    public void setInfoPassword(String infoPassword) {
+        this.infoPassword = infoPassword;
     }
 }

@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.NavHostController;
 import androidx.navigation.Navigation;
@@ -24,6 +26,10 @@ import com.google.android.material.navigation.NavigationBarView;
 public class TeacherActivity extends AppCompatActivity {
 
     private ActivityTeacherBinding binding;
+
+    private TeacherHomeFragment teacherHomeFragment;
+    private TeacherMessageFragment teacherMessageFragment;
+    private TeacherPersonFragment teacherPersonFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,16 +57,21 @@ public class TeacherActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = null;
+
+                teacherHomeFragment = new TeacherHomeFragment();
+                teacherMessageFragment = new TeacherMessageFragment();
+                teacherPersonFragment = new TeacherPersonFragment();
+
                 int id = item.getItemId();
                 switch (id){
                     case R.id.navigation_teacher_home:
-                        fragment = new TeacherHomeFragment();
+                        fragment = teacherHomeFragment;
                         break;
                     case R.id.navigation_teacher_message:
-                        fragment = new TeacherMessageFragment();
+                        fragment = teacherMessageFragment;
                         break;
                     case R.id.navigation_teacher_person:
-                        fragment = new TeacherPersonFragment();
+                        fragment = teacherPersonFragment;
                         break;
                 }
                 //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();

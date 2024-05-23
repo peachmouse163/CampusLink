@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="infoQuestion">
+        <item>学号</item>
+        <item>手机号</item>
+        <item>电子邮箱</item>
+        <item>家庭地址</item>
+        <item>填空题</item>
+        <item>单选题</item>
+        <item>多选题</item>
+        <item>时间题</item>
+    </string-array>
+</resources>

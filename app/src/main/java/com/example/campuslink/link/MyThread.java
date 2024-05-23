@@ -31,6 +31,13 @@ public class MyThread extends Thread{
     public static final int INITDATA=7;
     public static final int VOLUSECC=8;
     public static final int ALLMESS=9;
+    public static final int ALLCOLL=10;
+    public static final int ALLSIGN=11;
+    public static final int QUESTIONS = 12;
+    public static final int ALLTRAN = 13;
+
+    public static final int fiveSecond = 5000;
+
     //mod 参数
     public final String LOGIN="login";
     public final String NEWS="mews";
@@ -40,6 +47,10 @@ public class MyThread extends Thread{
     public final String SENDCOM="sendcom";
     public final String VOLUSIGN="volusign";
     public final String GETMESS="getMess";
+    public final String GETQUES="getQues";
+    public final String GETTRAN="getTran";
+
+    public final String SECOND5 ="secondFive";
     //标志
     public static boolean comModFlag = true;
     public static boolean sendComFlag = true;
@@ -76,7 +87,79 @@ public class MyThread extends Thread{
                 break;
             case GETMESS:
                 getAllMess();
+                break;
+            case GETQUES:
+                getAllQues();
+                break;
+            case GETTRAN:
+                getAllTran();
+                break;
+            case SECOND5:
+                fiveSecond();
+                break;
             default:break;
+        }
+    }
+
+    private void fiveSecond() {
+        try{
+            Thread.sleep(5000);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        Message message = Message.obtain();//更新UI就要向消息机制发送消息
+        message.what=fiveSecond;//用来标志是哪个消息
+        message.obj="";//消息主体
+        handler.sendMessage(message);
+    }
+
+    private void getAllTran() {
+        try {
+            //http://192.168.3.61:8080/campuslink/VoluServlet?mod=updata&voluId=1&voluState=0;12001260
+            //获取所有的ques，不需要参数
+            connection = HttpConnectionUtils.getConnection("",HttpConnectionUtils.tran);
+            int code = connection.getResponseCode();
+            //Log.d(TAG, "getAllQues: "+code);
+            if(code==200){
+                InputStream inputStream = connection.getInputStream();
+                String str = StreamChangeStrUtils.toChange(inputStream);//写个工具类流转换成字符串
+                Message message = Message.obtain();//更新UI就要向消息机制发送消息
+                message.what=ALLTRAN;//用来标志是哪个消息
+                message.obj=str;//消息主体
+                handler.sendMessage(message);
+                Log.d(TAG, "getAlltran: "+str);
+            }
+        } catch (Exception e) {//会抛出很多个异常，这里抓一个大的异常0
+            e.printStackTrace();
+            Message message = Message.obtain();
+            message.what=EXCEPT;
+            message.obj="服务器异常...请稍后再试";
+            handler.sendMessage(message);
+        }
+    }
+
+    private void getAllQues() {
+        try {
+            //http://192.168.3.61:8080/zzzlogin/VoluServlet?mod=updata&voluId=1&voluState=0;12001260
+            //获取所有的ques，不需要参数
+            connection = HttpConnectionUtils.getConnection("",HttpConnectionUtils.ques);
+            int code = connection.getResponseCode();
+            //Log.d(TAG, "getAllQues: "+code);
+            if(code==200){
+                InputStream inputStream = connection.getInputStream();
+                String str = StreamChangeStrUtils.toChange(inputStream);//写个工具类流转换成字符串
+                Message message = Message.obtain();//更新UI就要向消息机制发送消息
+                message.what=QUESTIONS;//用来标志是哪个消息
+                message.obj=str;//消息主体
+                handler.sendMessage(message);
+                Log.d(TAG, "getAllQues: "+str);
+            }
+        } catch (Exception e) {//会抛出很多个异常，这里抓一个大的异常0
+            e.printStackTrace();
+            Message message = Message.obtain();
+            message.what=EXCEPT;
+            message.obj="服务器异常...请稍后再试";
+            handler.sendMessage(message);
         }
     }
 
@@ -84,9 +167,10 @@ public class MyThread extends Thread{
         try {
             //http://192.168.3.61:8080/zzzlogin/VoluServlet?mod=updata&voluId=1&voluState=0;12001260
             //获取所有的新闻，不需要参数
-            String voluUrl= "mod="+ URLEncoder.encode(datas.get("mod"),"utf-8");
+            String voluUrl="infoNo="+ URLEncoder.encode(datas.get("infoNo"),"utf-8");
             connection = HttpConnectionUtils.getConnection(voluUrl,HttpConnectionUtils.mess);
             int code = connection.getResponseCode();
+            Log.d(TAG, "getAllMess: "+code);
             if(code==200){
                 InputStream inputStream = connection.getInputStream();
                 String str = StreamChangeStrUtils.toChange(inputStream);//写个工具类流转换成字符串
@@ -94,6 +178,7 @@ public class MyThread extends Thread{
                 message.what=ALLMESS;//用来标志是哪个消息
                 message.obj=str;//消息主体
                 handler.sendMessage(message);
+                Log.d(TAG, "getAllMess: "+str);
             }
         } catch (Exception e) {//会抛出很多个异常，这里抓一个大的异常0
             e.printStackTrace();
@@ -253,6 +338,7 @@ public class MyThread extends Thread{
                 }
 
                 Thread.sleep(1500);
+                comModFlag = false;
             } catch (Exception e) {//会抛出很多个异常，这里抓一个大的异常
                 e.printStackTrace();
                 Message message = Message.obtain();

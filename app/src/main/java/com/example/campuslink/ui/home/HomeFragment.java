@@ -10,6 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,28 +28,42 @@ import com.example.campuslink.InitAll;
 import com.example.campuslink.R;
 import com.example.campuslink.link.LinkToData;
 import com.example.campuslink.link.MyThread;
+import com.example.campuslink.link.ReThread;
 import com.example.campuslink.login.LoginViewModel;
 import com.example.campuslink.model.NewsModel;
 import com.example.campuslink.model.Preview;
 import com.example.campuslink.model.VoluModel;
 import com.example.campuslink.news.NewsActivity;
 import com.example.campuslink.databinding.FragmentHomeBinding;
+import com.example.campuslink.thin.CreateThinActivity;
 import com.example.campuslink.thin.ThinActivity;
 import com.example.campuslink.volu.VoluActivity;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.core.BasePopupView;
+import com.lxj.xpopup.interfaces.OnInputConfirmListener;
+import com.lxj.xpopup.util.XPopupUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements InitAll{
 
     private final String TAG = "HomeFragment";
 
+    private String newPwd = "";
     public static ArrayList<NewsModel> dataList;
     public static ArrayList<Preview> dataListThin,dataListVolu;
     public static ArrayList<VoluModel> myVolus;
 
+    private ImageButton btnCreateThin,btnAddVolu,btnAddMess;
+    private LinearLayout linearLayout;
+
     private ListView listView,listThin,listVolu;
     private MyThread myThread,myThinThread,myVoluThread;
+    private ReThread voluThread;
     private FssBaseAdapter adapter;
     private FssImgAdapter imgThinAdapter,imgVoluAdapter;
     private FragmentHomeBinding binding;
@@ -76,8 +93,7 @@ public class HomeFragment extends Fragment implements InitAll{
                     else
                         Toast.makeText(requireContext(),"暂无thin",Toast.LENGTH_LONG).show();
                     break;
-
-                case MyThread.GETALLVOLU:
+                /*case MyThread.GETALLVOLU:
                     if (!((String)msg.obj).equals("")){
                         dataListVolu = LinkToData.getVolu((String) msg.obj);
                         for (Preview volu:
@@ -91,17 +107,28 @@ public class HomeFragment extends Fragment implements InitAll{
                     }
                     else
                         Toast.makeText(requireContext(),"暂无volu",Toast.LENGTH_LONG).show();
+                    break;*/
+                case 1000:
+                    break;
+                case 1001:
+                    //获得所有志愿活动
+                    Gson gson = new Gson();
+                    dataListVolu = gson.fromJson(((String) msg.obj),new TypeToken<List<VoluModel>>(){}.getType());
+                    imgVoluAdapter = new FssImgAdapter(requireActivity(),getMyVolus(dataListVolu));
+                    listVolu.setAdapter(imgVoluAdapter);
                     break;
             }
         }
     };
 
     private ArrayList<VoluModel> getMyVolus(ArrayList<Preview> dataListVolu) {
+        Gson gson = new Gson();
         ArrayList<VoluModel> voluModels = new ArrayList<>();
         for (Preview preview :
                 dataListVolu) {
             VoluModel voluModel = (VoluModel) preview;
-            if (new StringBuffer(voluModel.getVoluState()).indexOf(LoginViewModel.user.getInfoNo()+"") > -1)
+            List<String> list = gson.fromJson(voluModel.getVoluState(),new TypeToken<List<String>>(){}.getType());
+            if (!list.contains(LoginViewModel.user.getInfoNo()+""))
                 voluModels.add(voluModel);
         }
         return voluModels;
@@ -120,9 +147,31 @@ public class HomeFragment extends Fragment implements InitAll{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //super.onViewCreated(view, savedInstanceState);
+        if (LoginViewModel.user.getInfoRefresh().equals("0")){
+            new XPopup
+                    .Builder(getContext())
+                    .dismissOnBackPressed(false)
+                    .dismissOnTouchOutside(false)
+                    .asInputConfirm("新密码", "由于首次登陆或已重置密码，请重新输入自定义密码.",
+                            new OnInputConfirmListener() {
+                                @Override
+                                public void onConfirm(String text) {
+                                    newPwd = text;
+                                    HashMap<String,Object> datas = new HashMap<>();
+                                    LoginViewModel.user.setInfoPassword(newPwd);
+                                    datas.put("user",LoginViewModel.user);
+                                    ReThread cThread = new ReThread(datas,handler,"");
+                                    cThread.setFlag(1000);
+                                    cThread.start();
+                                }
+                            })
+                    .show();
+        }
+
         dataList = new ArrayList<>();
         dataListThin = new ArrayList<>();
         dataListVolu = new ArrayList<>();
+        myVolus = new ArrayList<>();
 
         //开启获得新闻
         startGetNewsThread();
@@ -136,11 +185,14 @@ public class HomeFragment extends Fragment implements InitAll{
     }
 
     private void startGetVoluThread() {
-        myVoluThread = new MyThread();
+        /*myVoluThread = new MyThread();
         myVoluThread.setMod(myThread.VOLU);
         myVoluThread.setHandler(handler);
         myVoluThread.setDatas(null);
-        myVoluThread.start();
+        myVoluThread.start();*/
+        voluThread = new ReThread(null,handler,1001);
+        voluThread.start();
+
     }
 
     private void startGetThinThread() {
@@ -175,6 +227,14 @@ public class HomeFragment extends Fragment implements InitAll{
         listView = requireView().findViewById(R.id.home_list_news);
         listThin = requireView().findViewById(R.id.home_list_thin);
         listVolu = requireView().findViewById(R.id.home_list_volu);
+
+        btnCreateThin = requireView().findViewById(R.id.home_ibtn_thin);
+        btnAddVolu = requireView().findViewById(R.id.home_ibtn_add_volu);
+        btnAddMess = requireView().findViewById(R.id.home_ibtn_add_mess);
+
+        linearLayout = requireView().findViewById(R.id.home_ll_layout);
+        linearLayout.removeView(btnAddMess);
+        linearLayout.removeView(btnAddVolu);
     }
 
     @Override
@@ -222,6 +282,12 @@ public class HomeFragment extends Fragment implements InitAll{
                 Intent intent = new Intent(getContext(), VoluActivity.class);
                 intent.putExtra("volu",position);
                 startActivity(intent);
+            }
+        });
+        btnCreateThin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(requireContext(), CreateThinActivity.class));
             }
         });
     }

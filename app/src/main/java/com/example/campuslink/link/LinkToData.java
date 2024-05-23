@@ -2,10 +2,17 @@ package com.example.campuslink.link;
 
 import android.util.Log;
 
+import com.example.campuslink.login.LoginViewModel;
+import com.example.campuslink.model.CollectModel;
 import com.example.campuslink.model.CommunicationModel;
+import com.example.campuslink.model.MessModel;
+import com.example.campuslink.model.Message;
 import com.example.campuslink.model.NewsModel;
 import com.example.campuslink.model.Preview;
+import com.example.campuslink.model.QuesToAnModel;
+import com.example.campuslink.model.SignModel;
 import com.example.campuslink.model.ThinModel;
+import com.example.campuslink.model.TranModel;
 import com.example.campuslink.model.User;
 import com.example.campuslink.model.VoluModel;
 
@@ -15,6 +22,45 @@ import java.util.List;
 public class LinkToData {
 
     private static final String TAG = "LinkToData";
+
+    public static ArrayList<Preview> getTrans(String string){
+        ArrayList<Preview> tranModels = new ArrayList<>();
+
+        if (string != null){
+            String[] bigString = string.split("~");
+
+            for (String midString:
+                    bigString) {
+                String[] mString = midString.split(";");
+                if (mString.length>1){
+                    //String tranId, String infoNo,String tranMoney, String tranPlace,  String tranDatetime, String tranPic,String tranTitle, String tranContent, String tranState
+                    TranModel model = new TranModel(mString[0],mString[1],mString[2],mString[3],mString[4],mString[5],mString[6],mString[7],mString[8]);
+                    tranModels.add(model);
+                }
+            }
+        }
+
+        return tranModels;
+    }
+
+    public static ArrayList<QuesToAnModel> getQuestions(String string){
+        ArrayList<QuesToAnModel> quesModels = new ArrayList<>();
+
+        if (string != null){
+            String[] bigString = string.split("~");
+
+            for (String midString:
+                    bigString) {
+                String[] mString = midString.split(";");
+                if (mString.length>1){
+                    QuesToAnModel model = new QuesToAnModel(mString[0],mString[1],mString[2],mString[3],mString[4],mString[5],mString[6],mString[7],mString[8]);
+                    quesModels.add(model);
+                }
+            }
+        }
+
+        return quesModels;
+    }
 
     public static User getUser(String string){
         User user = new User();
@@ -29,7 +75,7 @@ public class LinkToData {
             user.setInfoClass(strings[6]);
             user.setInfoRefresh(strings[7]);
             user.setInfoPassword(strings[8]);
-            User.setInfoIdentity(Integer.parseInt(strings[9]));
+            LoginViewModel.user.setInfoIdentity(Integer.parseInt(strings[9]));
 
             //仅logcat检查登录账户数据
             for (String s :

@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.campuslink.model.Preview;
 import com.example.campuslink.model.ThinModel;
+import com.example.campuslink.model.TranModel;
 import com.example.campuslink.model.VoluModel;
 import com.fss.adapter.listview.BaseAdapter;
 import com.fss.adapter.listview.viewholder.BaseViewHolder;
@@ -16,6 +17,12 @@ import java.util.List;
 import java.util.Objects;
 
 public class FssImgAdapter extends BaseAdapter<Preview, FssImgAdapter.ViewImgHolder> {
+
+    public static int[] pics = {R.drawable.pic_desk
+            ,R.drawable.pic_bench
+            ,R.drawable.pic_desk_2
+            ,R.drawable.pic_pen,};
+
     public FssImgAdapter(Context context, List datas) {
         super(context, datas,R.layout.layout_list_home);
     }
@@ -58,6 +65,10 @@ public class FssImgAdapter extends BaseAdapter<Preview, FssImgAdapter.ViewImgHol
         }
         //默认图片
         holder.imgPic.setImageResource(R.drawable.ic_pic);
+        if (preview instanceof TranModel){
+            //holder.imgPic.setImageResource(((TranModel) preview).getTranPic());
+            holder.imgPic.setImageResource(pics[position]);
+        }
 
     }
 

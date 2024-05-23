@@ -7,7 +7,7 @@
 
     <ListView
         android:id="@+id/message_list_connect"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="48dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

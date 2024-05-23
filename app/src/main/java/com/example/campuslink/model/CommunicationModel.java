@@ -2,68 +2,72 @@ package com.example.campuslink.model;
 
 import com.example.campuslink.R;
 
+import java.util.List;
+
 public class CommunicationModel implements Message{
 
-    String infoName,message,comNo;
-    int infoPic;
-    String time;
-    String infoAnother;
+    String comNo;
+    String comDatetime,infoNoA,infoNoB,comContent;
 
     public CommunicationModel() {
-        this.infoName = Message.title;
-        this.infoPic = R.drawable.ic_hello;
-        this.message = Message.message;
-        this.time = "";
     }
 
-    //数据库的构造方法
-    public CommunicationModel(String comNo, String time,String infoName, String infoAnother, String message) {
+    public CommunicationModel(String comNo, String comDatetime, String infoNoA, String infoNoB, String comContent) {
         this.comNo = comNo;
-        this.time = time;
-        this.infoName = infoName;
-        this.infoAnother = infoAnother;
-        this.message = message;
-
-        //不含头像，额外查数据库
-        this.infoPic = R.drawable.ic_hello;
+        this.comDatetime = comDatetime;
+        this.infoNoA = infoNoA;
+        this.infoNoB = infoNoB;
+        this.comContent = comContent;
     }
 
-    public void setInfoName(String infoName) {
-        this.infoName = infoName;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public String getComNo() {
+        return comNo;
     }
 
     public void setComNo(String comNo) {
         this.comNo = comNo;
     }
 
-    public void setInfoPic(int infoPic) {
-        this.infoPic = infoPic;
+    public String getComDatetime() {
+        return comDatetime;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setComDatetime(String comDatetime) {
+        this.comDatetime = comDatetime;
     }
 
-    public void setInfoAnother(String infoAnother) {
-        this.infoAnother = infoAnother;
+    public String getInfoNoA() {
+        return infoNoA;
     }
 
-    public String getInfoAnother() {
-        return infoAnother;
+    public void setInfoNoA(String infoNoA) {
+        this.infoNoA = infoNoA;
+    }
+
+    public String getInfoNoB() {
+        return infoNoB;
+    }
+
+    public void setInfoNoB(String infoNoB) {
+        this.infoNoB = infoNoB;
+    }
+
+    public String getComContent() {
+        return comContent;
+    }
+
+    public void setComContent(String comContent) {
+        this.comContent = comContent;
     }
 
     @Override
     public String getTitle() {
-        return this.infoName;
+        return this.infoNoB;
     }
 
     @Override
     public String getMessage() {
-        return this.message;
+        return this.comContent;
     }
 
     @Override
@@ -73,6 +77,22 @@ public class CommunicationModel implements Message{
 
     @Override
     public String getTime() {
-        return time;
+        return this.comDatetime;
+    }
+
+    @Override
+    public List<String> getReadList() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "CommunicationModel{" +
+                "comNo='" + comNo + '\'' +
+                ", comDatetime='" + comDatetime + '\'' +
+                ", infoNoA='" + infoNoA + '\'' +
+                ", infoNoB='" + infoNoB + '\'' +
+                ", comContent='" + comContent + '\'' +
+                '}';
     }
 }

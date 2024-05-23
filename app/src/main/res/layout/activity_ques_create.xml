@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/loginbackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ques.QuesCreateActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/shape_corner">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/cques_tv_infoNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:text="当前用户号:" />
+
+            <EditText
+                android:id="@+id/cques_et_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="问题标题:" />
+
+            <EditText
+                android:id="@+id/cques_et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="问题内容:" />
+
+            <TextView
+                android:id="@+id/cques_tv_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="15dp"
+                android:gravity="right"
+                android:text="当前时间：" />
+
+            <Spinner
+                android:id="@+id/cques_sp_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/cques_btn_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/shape_button"
+                android:text="发布" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</RelativeLayout>

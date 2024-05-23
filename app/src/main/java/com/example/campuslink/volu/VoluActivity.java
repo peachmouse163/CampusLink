@@ -19,10 +19,16 @@ import com.example.campuslink.R;
 import com.example.campuslink.link.MyThread;
 import com.example.campuslink.login.LoginViewModel;
 import com.example.campuslink.model.ThinModel;
+import com.example.campuslink.model.User;
 import com.example.campuslink.model.VoluModel;
 import com.example.campuslink.ui.home.HomeFragment;
+import com.example.campuslink.ui.teacher.TeacherHomeFragment;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class VoluActivity extends AppCompatActivity implements InitAll {
 
@@ -93,15 +99,20 @@ public class VoluActivity extends AppCompatActivity implements InitAll {
         Intent intent = getIntent();
         int thinNo = intent.getIntExtra("volu",0);
 
-        voluModel = (VoluModel) HomeFragment.dataListVolu.get(thinNo);
+        if (LoginViewModel.user.getInfoIdentity() > 0){
+            voluModel = (VoluModel) TeacherHomeFragment.dataListVolu.get(thinNo);
+        }else {
+            voluModel = (VoluModel) HomeFragment.dataListVolu.get(thinNo);
 
-        if (HomeFragment.myVolus.size()>0){
-            for (VoluModel volu :
-                    HomeFragment.myVolus) {
-                if (volu.getVoluId().equals(voluModel.getVoluId()))
-                    btnSign.setText("√");
+            if (HomeFragment.myVolus.size()>0){
+                for (VoluModel volu :
+                        HomeFragment.myVolus) {
+                    if (volu.getVoluId().equals(voluModel.getVoluId()))
+                        btnSign.setText("√");
+                }
             }
         }
+
 
 
         switch (voluModel.getVoluPoint()){
@@ -122,28 +133,38 @@ public class VoluActivity extends AppCompatActivity implements InitAll {
                 break;
         }
 
-        tvContent.setText(voluModel.getVoluContent());
-        tvPlace.setText(voluModel.getVoluPlace());
-        tvInfo.setText(voluModel.getInfoNo());
-        tvDate.setText(voluModel.getVoluTime());
+        tvContent.setText("\t"+voluModel.getVoluContent());
+        tvPlace.setText("地点："+voluModel.getVoluPlace());
+        tvInfo.setText(voluModel.getInfoNo()+",发布：");
+        //
+        tvInfo.setText("路老师,发布：");
+
+        tvDate.setText("发布时间"+voluModel.getVoluTime());
         if (voluModel.getVoluOnline().equals("0"))
             tvOnline.setText("线下");
         else
             tvOnline.setText("线上");
         tvTitle.setText(voluModel.getVoluTitle());
         imgTX.setImageResource(R.drawable.ic_hello);
-        tvNum.setText(voluModel.getVoluNum());
-        tvStart.setText(voluModel.getVoluStart());
-        tvEnd.setText(voluModel.getVoluEnd());
+        tvNum.setText("所需人数"+voluModel.getVoluNum());
+        tvStart.setText("开始时间"+voluModel.getVoluStart());
+        tvEnd.setText("结束时间"+voluModel.getVoluEnd());
+
+        if (LoginViewModel.user.getInfoIdentity() != 0){
+            btnSign.setText("仅查看");
+        }
 
     }
 
     @Override
     public void initClick() {
-        if (!btnSign.getText().toString().equals("√")) {
-            btnSign.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        if (LoginViewModel.user.getInfoIdentity() != 0)
+            return;
+
+        btnSign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!btnSign.getText().toString().equals("√")){
                     //String voluId, String voluTitle, String voluTime, String infoNo, String voluNum, String voluOnline
                     // , String voluPlace, String voluContent, String voluStart, String voluEnd, String voluPoint,String voluState
                     MyThread myThread = new MyThread();
@@ -151,13 +172,17 @@ public class VoluActivity extends AppCompatActivity implements InitAll {
                     HashMap<String, String> datas = new HashMap<>();
                     datas.put("mod", "updata");
                     datas.put("voluId", voluModel.getVoluId());
-                    datas.put("voluState", voluModel.getVoluState() + "_" + LoginViewModel.user.getInfoNo());
+                    Gson gson = new Gson();
+                    List<String> list = gson.fromJson(voluModel.getVoluState(),new TypeToken<List<String>>(){}.getType());
+                    list.add(LoginViewModel.user.getInfoNo()+"");
+                    String voluState = gson.toJson(list);
+                    datas.put("voluState", voluState);
                     myThread.setDatas(datas);
                     myThread.setHandler(handler);
                     myThread.start();
-
-                }
-            });
-        }
+                }else
+                    Toast.makeText(VoluActivity.this, "您已经报名成功。", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

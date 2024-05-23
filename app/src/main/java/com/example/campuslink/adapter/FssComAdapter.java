@@ -50,7 +50,7 @@ public class FssComAdapter extends BaseAdapter {
     public int getItemViewType(int position) {
         CommunicationModel model = mData.get(position);
 
-        if (!model.getTitle().equals(model.getInfoAnother()))
+        if (!model.getTitle().equals(model.getInfoNoB()))
             return TYPE_RECEIVE;
         else
             return TYPE_SEND;

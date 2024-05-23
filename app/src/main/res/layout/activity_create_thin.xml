@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".thin.CreateThinActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/WhiteSmoke"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/cthin_rg_attribute"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/cthin_rbtn_0"
+                android:text="丢东西了"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <RadioButton
+                android:id="@+id/cthin_rbtn_1"
+                android:text="捡到东西"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/cthin_et_title"
+            android:hint="标题"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/cthin_et_content"
+            android:hint="内容"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/cthin_et_place"
+            android:hint="地点"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/cthin_et_iphone"
+            android:hint="电话号码"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.github.gzuliyujiang.wheelpicker.widget.DatimeWheelLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:id="@+id/cthin_ibtn_pic"
+            android:background="@color/white"
+            android:src="@drawable/ic_insert_pic"
+            android:layout_margin="10dp"
+            android:onClick="onImagePicker"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            tools:ignore="UsingOnClickInXml" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/cthin_tv_infoNo"
+            android:text="当前用户号为："
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/cthin_btn_sub"
+            android:text="发布"
+            android:onClick="onSub"
+            android:layout_marginVertical="15dp"
+            android:background="@drawable/shape_corner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UsingOnClickInXml" />
+
+    </LinearLayout>
+
+
+</ScrollView>

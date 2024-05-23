@@ -19,6 +19,7 @@ import com.example.campuslink.R;
 import com.example.campuslink.adapter.FssComAdapter;
 import com.example.campuslink.link.LinkToData;
 import com.example.campuslink.link.MyThread;
+import com.example.campuslink.login.LoginViewModel;
 import com.example.campuslink.model.CommunicationModel;
 import com.example.campuslink.model.Message;
 import com.example.campuslink.model.User;
@@ -98,17 +99,21 @@ public class ComActivity extends AppCompatActivity  implements InitAll {
 
         Log.d(TAG, "initData: friend"+friend);
 
-        for (Message message : MessageFragment.allMessages) {
-            if (message instanceof CommunicationModel){
-                CommunicationModel comModel = (CommunicationModel) message;
-                if (comModel.getTitle().equals(friend))
-                    comList.add(comModel);
+        try {
+            for (Message message : MessageFragment.allMessages) {
+                if (message instanceof CommunicationModel){
+                    CommunicationModel comModel = (CommunicationModel) message;
+                    if (comModel.getTitle().equals(friend))
+                        comList.add(comModel);
+                }
             }
-        }
 
-        for (CommunicationModel com :
-                comList) {
-            Log.d(TAG, "initData: "+com.getTitle()+">"+com.getInfoAnother()+">"+com.getTime()+">"+com.getMessage());
+            for (CommunicationModel com :
+                    comList) {
+                Log.d(TAG, "initData: "+com.getTitle()+">"+com.getInfoNoB()+">"+com.getTime()+">"+com.getMessage());
+            }
+        }catch (NullPointerException e){
+            ;
         }
 
         comAdapter = new FssComAdapter(getApplicationContext(),comList);
@@ -130,7 +135,7 @@ public class ComActivity extends AppCompatActivity  implements InitAll {
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 data.put("mod","insert");
-                data.put("infoNo", User.infoNo+"");
+                data.put("infoNo", LoginViewModel.user.getInfoNo()+"");
                 data.put("datetime",format.format(date));
                 data.put("infoNoB",friend);
                 data.put("Content",content);

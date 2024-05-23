@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".volu.VoluHistoryActivity">
+
+    <TextView
+        android:text="志愿记录"
+        android:id="@+id/voluhis_tv_score"
+        android:gravity="center"
+        android:paddingVertical="5dp"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:background="@color/SpringGreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:id="@+id/voluhis_lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
