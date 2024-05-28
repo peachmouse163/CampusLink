@@ -5,6 +5,7 @@
     <string name="title_notifications">Question</string>
     <string name="title_message">message</string>
     <string name="title_person">person</string>
+    <string name="search_hint">0</string>
 
     <item name="Tag_RECEIVE" type="id" />
     <item name="Tag_SEND" type="id" />

@@ -29,6 +29,8 @@ import com.example.campuslink.model.SignModel;
 import com.example.campuslink.ui.message.MessageFragment;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.lxj.xpopup.XPopup;
+import com.lxj.xpopup.interfaces.OnConfirmListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
     private SignModel signModel;
     private List<View> viewList;
     private List<String> readList;
-    private List<Question> questionList,personList,existList,nonExistList;
+    private List<Question> questionList,personList,existList;
     private Gson gson;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
@@ -62,6 +64,7 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
                     personList = gson.fromJson((String)msg.obj,new TypeToken<List<Question>>(){}.getType() );
                     Log.d(TAG, "handleMessage: personList:"+personList.size());
                     initView();
+                    createTips();
                     break;
                 case 1017:
                     //更新coll表和对应的pers表
@@ -71,6 +74,27 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
             }
         }
     };
+
+    private void createTips() {
+        if (existList.size()>0){
+            String titleText = "自动填写"+existList.size()+"个问题";
+            StringBuffer contentText = new StringBuffer();
+            for (int i = 0; i <existList.size(); i++) {
+                contentText.append((i+1));
+                contentText.append(":");
+                contentText.append(existList.get(i).getQuestion());
+                contentText.append("\n");
+            }
+            new XPopup.Builder(ShowMessagesActivity.this).asConfirm(titleText, contentText,
+                            new OnConfirmListener() {
+                                @Override
+                                public void onConfirm() {
+                                   ;
+                                }
+                            })
+                    .show();
+        }
+    }
 
     private TextView tvTitle, tvContent, tvTime, tvDepartment;
     private Button btnSub;
@@ -154,6 +178,7 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
                     editText.setTag(ques.getQuestion());
                     linearLayout.addView(editText);
                     viewList.add(editText);
+
                 }
             }
             readList = collectModel.getCollList();
@@ -163,13 +188,15 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
             }
         }
         if (message instanceof SignModel) {
+            Log.d(TAG, "initView: intent");
             signModel = (SignModel) message;
             title = signModel.getSignTitle();
+            Log.d(TAG, "initView: "+title);
             content = signModel.getSignContent();
             SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
             time = signModel.getSignTime();
             department = signModel.getSignDepartment();
-
+            Log.d(TAG, "initView: "+signModel.getSignQuestions());
             questionList = signModel.getSignQuestions();
             Log.d(TAG, "initView: " + questionList.size());
 
@@ -224,7 +251,6 @@ public class ShowMessagesActivity extends AppCompatActivity implements InitAll {
         readList = new ArrayList<>();
         personList = new ArrayList<>();
         existList = new ArrayList<>();
-        nonExistList = new ArrayList<>();
         viewList = new ArrayList<>();
         gson = new Gson();
 

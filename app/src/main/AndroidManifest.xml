@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.campuslink">
-    <!-- 访问签名 -->
+    <!--轮询,闹钟服务-->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SET_ALARM"/>
+    <!-- 通知栏 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- 访问签名 -->
     <uses-permission android:name="android.permission.PACKAGE_ADNOUNCEMENT" /> <!-- 拨打电话权限 -->
     <uses-permission android:name="android.permission.CALL_PHONE" /> <!-- 访问互联网权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
@@ -23,6 +27,10 @@
         android:theme="@style/Theme.CampusLink"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <service
+            android:name=".link.PollingService"
+            android:exported="false"></service>
+
         <activity
             android:name=".ui.teacher.tmess.MessResultActivity"
             android:exported="false" />

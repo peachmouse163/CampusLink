@@ -2,6 +2,7 @@ package com.example.campuslink;
 
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ public class FssBaseAdapter extends BaseAdapter<String, FssBaseAdapter.ViewHolde
     protected void onBindView(ViewHolder holder, String s, int position) {
         //super.onBindView(holder, s, position);
         holder.tvText.setText(s);
+        holder.tvText.setTextSize(TypedValue.COMPLEX_UNIT_SP, 35); // 设置字体大小为20sp
     }
 
     static class ViewHolder extends BaseViewHolder {
